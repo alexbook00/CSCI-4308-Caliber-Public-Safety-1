@@ -11,11 +11,9 @@ Coursework for CSCI 4308 - Senior Capstone Project
  2. Set App File and Run
  
 (Mac/Linux)
-
 $ export FLASK_APP=app.py
 
-(Windows
-
+(Windows)
 $ set FLASK_APP=app.py
 
 $ flask run
