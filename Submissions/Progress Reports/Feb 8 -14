@@ -1,0 +1,15 @@
+Hello all,
+
+This email is the status report for the week of February 1st - 7th. As always, let us know if you have any questions or concerns!
+
+What we planned to accomplish in the past week:
+We wanted to have a good grasp on the necessity (or lack thereof) of permissions in order to view embedded PowerBI reports, and soon after would start getting into how we will implement the API in our overall design.
+
+What we accomplished this week:
+Joe gave our PowerBI account the permissions necessary to publicly embed reports into webpages, so we tested the functionality, and it seems to be exactly what we are looking for! We talked about various ideas for our next steps and what we could do with our new findings.
+
+What we plan to accomplish in the next week:
+Now that we are positive that reports can be embedded as we would like, it's time to really dig into the PowerBI API and its functionality!
+
+Best,
+Alex Book & Student Capstone Team
