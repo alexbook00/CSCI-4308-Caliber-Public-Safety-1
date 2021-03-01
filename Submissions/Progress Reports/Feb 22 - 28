@@ -1,0 +1,15 @@
+Hello all,
+
+This email is the status report for the week of February 22nd - 28th. As always, let us know if you have any questions or concerns!
+
+What we planned to accomplish in the past week:
+We wanted to get into some fashion of report creation with the PowerBI API, as well as get further into creating detailed reports.
+
+What we accomplished this week:
+We uncovered the unfortunate reality that creating reports in any way aside from using the PowerBI interface itself isn't possible. We discussed this with Joe, as well as what our new plans would be moving forward. The original goal of creating a dashboard of canned reports for each department/organization is still very much possible, so that is our direction moving forward!
+
+What we plan to accomplish in the next week:
+This week is focused nearly entirely on reports. We will send a list of possible reports to Joe for approval and brainstorm further ideas. We also may look into the possibility of running simply data-cleaning Python scripts through PowerBI, should such a utility be necessary.
+
+Best,
+Alex Book & Student Capstone Team
