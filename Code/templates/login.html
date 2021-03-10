@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+<!-- <link rel="stylesheet" href="{{ url_for('static', filename='.css') }}"/> -->
+</head>
+
+<body>
+<!-- <div id = 'container'>
+    <img id = 'applogo' src="static/logo.png" alt="" />
+    <a href="/home" target="blank"><img id = 'applogo' src="static/logo.png" alt="" /></a>
+</div> -->
+
+<div id="outer-content">
+    <div id="content">
+      <div id="main">
+        <h2>Caliber Public Safety - Power BI</h2>
+  <p><strong>Please Login</strong></p>
+  <form action="/loginuser" method="post">
+     <p>Username: <input name="username"> Password: <input type="password" name="password"> </p>
+     <input type = "submit">
+   </form>
+   <p id="para1"><strong>{{ Message }}</strong></p>
+
+</div>
+</body>
+</html>
