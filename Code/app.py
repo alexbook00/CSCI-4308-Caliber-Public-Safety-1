@@ -1,11 +1,18 @@
 from flask import Flask, render_template, url_for, request, redirect, flash, send_from_directory, send_file, safe_join, abort, make_response
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, 
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
+import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////C:\\'
+
+if os.name == "nt":
+    db_file_path = 'sqlite:////' + os.path.dirname(os.path.realpath(__file__)) + "\login.db"
+else:
+    db_file_path = 'sqlite:////' + os.path.dirname(os.path.realpath(__file__)) + "/login.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = db_file_path
 app.config['SECRET_KEY'] = 'sd65fg62fd6'
+
+db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
