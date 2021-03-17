@@ -21,7 +21,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(30), unique=True)
     password = db.Column(db.String(30))
-
+    
 #flask-login call back funtion to load user
 @login_manager.user_loader
 def load_user(user_id):
@@ -32,24 +32,35 @@ def load_user(user_id):
 def unauthorized():
     return render_template('login.html', Message = "Unauthorized user please log in.")
 
+@app.route('/')
+def login():
+    return render_template('login.html')
+
 #fuction run when user hits submit on login page
 @app.route('/loginuser', methods=['POST','GET'])
 def loginuser():
-    #pull username and password from html
-    username = request.form['username']
+    username = request.form['username']#pull username and password from html
     password = request.form['password']
-    #query sqllite for username
-    user = User.query.filter_by(username=username).first()
-    Realpassword =  User.query.filter_by(password=username).first()
-    #Check username and password
-    if not user:
-        return render_template('login.html', Message = 'User not found.')
-    if password != Realpassword :
-        return render_template('login.html', Message = 'Wrong password.')
-    login_user(user)
-    return redirect(url_for('index'))
+    user = User.query.filter_by(username=username).first() #query sqllite for username
+    try:
+        if user.username == username and password == user.password:
+            login_user(user)
+            return redirect(url_for('index'))
+    except:
+        return render_template('login.html', Message = 'Incorrect username or password.')
+    return render_template('login.html', Message = 'Incorrect username or password.')
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return render_template('login.html', Message = 'You are now logged out.')
+    
 
 @app.route('/index')
 @login_required
 def index():
     return render_template('index.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
