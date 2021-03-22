@@ -1,10 +1,13 @@
 from flask import Flask, render_template, url_for, request, redirect, flash, send_from_directory, send_file, safe_join, abort, make_response
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
+from sassutils.wsgi import SassMiddleware
 import os
 
 app = Flask(__name__)
-
+# app.wsgi_app = SassMiddleware(app.wsgi_app, {
+#     'app': ('static/sass', 'static/css', '/static/css')
+# })
 if os.name == "nt":
     db_file_path = 'sqlite:////' + os.path.dirname(os.path.realpath(__file__)) + "\login.db"
 else:

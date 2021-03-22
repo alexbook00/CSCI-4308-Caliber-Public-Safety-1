@@ -1,0 +1,49 @@
+:root {
+    --main-blue: rgb(67,121,189);
+    --main-gold: #ffc629;
+    --main-gray: #54565a;
+
+  }
+
+
+.login-box {
+    background: #fdfefe;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    border-radius: 25px;
+  }
+
+.login-logo{
+    width: 20vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
+
+.open-sans-font{
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  /* .input-field {
+    padding: 12px 5px;
+    input {
+      font-size: 16px;
+      display: block;
+      font-family: 'Rubik', sans-serif;
+      width: 100%;
+      padding: 10px 1px;
+      border: 0;
+      border-bottom: 1px solid #747474;
+      outline: none;
+      transition: all .2s;
+      &::placeholder {
+        text-transform: uppercase;
+      }
+      
+      &:focus {
+        border-color: #222;
+      }
+    }
+  } */
