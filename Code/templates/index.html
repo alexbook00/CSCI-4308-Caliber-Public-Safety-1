@@ -1,12 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Capstone Flask App</title>
-  </head>
-  <body>
-      <h1>Index.html</h1>
-          {{message}}
-	<iframe width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=c60d3487-ad9c-4a01-8083-c19d5870d685&autoAuth=true&ctid=d526302b-0cbf-4a95-af6e-7d5a821c0923&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXVzLW5vcnRoLWNlbnRyYWwtYy1wcmltYXJ5LXJlZGlyZWN0LmFuYWx5c2lzLndpbmRvd3MubmV0LyJ9" frameborder="0" allowFullScreen="true"></iframe>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <title>Capstone Flask App</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+</head>
+
+<body>
+  <div class="topnav">
+    <img src="static/pictures/logo2.png" class="login-logo-nav" alt="Caliber Public Safety logo" />
+    <a style="float: right;" class="a-plain" href="/logout" target="blank"><button class="button"
+        style="float: right;">Log Out</button></a>
+  </div>
+
+  <div class="iframe-div">
+    <h1 class="open-sans-font" style="text-align: center;">Andy's Dashboard</h1>
+    <iframe width="100%" height="550"
+      src="https://app.powerbi.com/view?r=eyJrIjoiYjllMGEyMDgtNzAyMS00ZjliLTk5NDQtZThiNjc2YWNlYTVkIiwidCI6ImQ1MjYzMDJiLTBjYmYtNGE5NS1hZjZlLTdkNWE4MjFjMDkyMyIsImMiOjN9"
+      frameborder="0" allowFullScreen="true"></iframe>
+  </div>
+
+  <div class="iframe-div">
+    <h1 class="open-sans-font" style="text-align: center;">Weapons Pie Chart</h1>
+    <iframe class="iframe" width="70%" height="541.25"
+      src="https://app.powerbi.com/reportEmbed?reportId=c60d3487-ad9c-4a01-8083-c19d5870d685&autoAuth=true&ctid=d526302b-0cbf-4a95-af6e-7d5a821c0923&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXVzLW5vcnRoLWNlbnRyYWwtYy1wcmltYXJ5LXJlZGlyZWN0LmFuYWx5c2lzLndpbmRvd3MubmV0LyJ9"
+      frameborder="0" allowFullScreen="true"></iframe>
+  </div>
+
+  <div class="iframe-div">
+    <h1 class="open-sans-font" style="text-align: center;">Offences per Year</h1>
+    <iframe class="iframe" width="100%" height="541.25"
+      src="https://app.powerbi.com/reportEmbed?reportId=4846b065-c335-4ca8-ae50-11bb2feee144&autoAuth=true&ctid=d526302b-0cbf-4a95-af6e-7d5a821c0923&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXVzLW5vcnRoLWNlbnRyYWwtYy1wcmltYXJ5LXJlZGlyZWN0LmFuYWx5c2lzLndpbmRvd3MubmV0LyJ9"
+      frameborder="0" allowFullScreen="true"></iframe>
+  </div>
+</body>
+
 </html>
