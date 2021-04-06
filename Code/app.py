@@ -1,8 +1,9 @@
 from flask import Flask, render_template, url_for, request, redirect, flash, send_from_directory, send_file, safe_join, abort, make_response
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from sassutils.wsgi import SassMiddleware
 import os
+import json
 
 app = Flask(__name__)
 # app.wsgi_app = SassMiddleware(app.wsgi_app, {
@@ -24,6 +25,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(30), unique=True)
     password = db.Column(db.String(30))
+    dashboard = db.Column(db.Text)
     
 #flask-login call back funtion to load user
 @login_manager.user_loader
@@ -63,7 +65,16 @@ def logout():
 @app.route('/index')
 @login_required
 def index():
-    return render_template('index.html')
+    if current_user.is_authenticated:
+        thisDashboard = json.loads(current_user.dashboard)
+    return render_template('index.html', Dashboards = thisDashboard)
+
+@app.route('/edit')
+@login_required
+def edit():
+    if current_user.is_authenticated:
+        thisDashboard = json.loads(current_user.dashboard)
+    return render_template('edit.html', Dashboards = thisDashboard)
 
 if __name__ == '__main__':
     app.run(debug=True)
