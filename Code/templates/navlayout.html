@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    {% block head %}
+    <meta charset="utf-8" />
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    {% endblock %}
+</head>
+
+<body>
+    <div class="topnav">
+        <img src="static/pictures/logo2.png" class="login-logo-nav" alt="Caliber Public Safety logo" />
+        <a style="float: right" class="a-plain" href="/logout" target="blank">
+          <button class="button" style="float: right">Log Out</button>
+        </a>
+        {% block navbar%}{% endblock%}
+    </div>
+    {% block content %}{% endblock %}
+</body>
+
+</html>

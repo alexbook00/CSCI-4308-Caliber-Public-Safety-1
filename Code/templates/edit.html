@@ -1,33 +1,20 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-
-<head>
-  <meta charset="utf-8">
-  <title>Capstone Flask App</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
-</head>
-
-<body>
-  <div class="topnav">
-    <img src="static/pictures/logo2.png" class="login-logo-nav" alt="Caliber Public Safety logo" />
-    <a style="float: left;" class="a-plain" href="/index" target="blank"><button class="button button_red"
-        style="float: left;">Back to Dashboards</button></a>
-    <a style="float: right;" class="a-plain" href="/logout" target="blank"><button class="button"
-        style="float: right;">Log Out</button></a>
-  </div>
-
-  <form action="" method="post">
-    {% for key in Dashboards.keys() %}
-    <div class="input-field">
-      <input type="text" value="{{key}}" placeholder="Dashboard Name" name="dashboardName" autocomplete="nope">
-    </div>
-    <div class="input-field">
-      <input type="url" value="{{Dashboards[key]}}" placeholder="Power BI URL" name="powerBIURL" autocomplete="nope">
-    </div>
-    {% endfor %}
-    <input type="submit">
-  </form>
-
-</body>
-
-</html>
+{% extends "navlayout.html"%}
+{% block title %}Edit Dashboards{% endblock %}
+{% block navbar%}
+<a style="float: left;" class="a-plain" href="/index" target="blank"><button class="button button_red"
+  style="float: left;">Back to Dashboards</button></a>
+{%endblock%}
+{% block content %}
+<body style="background: var(--main-blue);"></body>
+<div class="login-box">
+{% for key in Dashboards.keys() %}
+<form class="form-inline" action="">
+  <label for="text">Dashboard Name:</label>
+  <input type="text" value="{{key}}" id="Dashboard" placeholder="Dashboard Name" name="dashboardName">
+  <label for="pwd">Power BI URL:</label>
+  <input type="url" value="{{Dashboards[key]}}" id="powerBIURL" placeholder="Power BI URL" name="powerBIURL">
+  <button type="submit">ADD</button>
+</form>
+{% endfor %}
+</div>
+{% endblock %}

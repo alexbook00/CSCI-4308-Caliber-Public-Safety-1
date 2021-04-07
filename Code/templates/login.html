@@ -1,37 +1,27 @@
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
-  <!-- <link href="{{ url_for('static', filename='css/style.scss.css') }}" rel="stylesheet" type="text/css"> -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-  <title>Login</title>
-</head>
-
+{% extends "layout.html"%}
+{% block title %}Login{% endblock %}
+{% block content %}
 <body style="background: var(--main-blue);">
-  <!-- <div id = 'container'>
-    <img id = 'applogo' src="static/logo.png" alt="" />
-    <a href="/home" target="blank"><img id = 'applogo' src="static/logo.png" alt="" /></a>
-</div> -->
-  <a class="login-logo"><img src="static/pictures/logo2.png" class="login-logo" alt="Caliber Public Safety logo" /></a>
-  <div class="login-box">
-    <div id="content">
-      <div id="main" class="open-sans-font">
-        <!-- <h2>Caliber Public Safety - Power BI</h2> -->
-        <p><strong>Login</strong></p>
-        <form action="/loginuser" method="post">
-          <div class="input-field">
-            <input type="username" placeholder="Username" name="username" autocomplete="nope">
-          </div>
-          <div class="input-field">
-            <input type="password" placeholder="Password" name="password" autocomplete="new-password">
-          </div>
-          <input type="submit">
-        </form>
-        <p id="para1"><strong>{{ Message }}</strong></p>
+<div id = 'container'>
+  <img id = 'applogo' src="static/logo.png" alt="" />
+  <a href="/home" target="blank"><img id = 'applogo' src="static/logo.png" alt="" /></a>
+</div>
+<a class="login-logo"><img src="static/pictures/logo2.png" class="login-logo" alt="Caliber Public Safety logo" /></a>
+<div class="login-box">
+  <div id="content">
+    <div id="main" class="open-sans-font">
+      <h2>Caliber Public Safety - Power BI</h2>
+      <p><strong>Login</strong></p>
+      <form action="/loginuser" method="post">
+        <div class="input-field">
+          <input type="username" placeholder="Username" name="username" autocomplete="nope">
+        </div>
+        <div class="input-field">
+          <input type="password" placeholder="Password" name="password" autocomplete="new-password">
+        </div>
+        <input type="submit">
+      </form>
+      <p id="para1"><strong>{{ Message }}</strong></p>
 
-      </div>
-</body>
-
-</html>
+    </div>
+{% endblock %}

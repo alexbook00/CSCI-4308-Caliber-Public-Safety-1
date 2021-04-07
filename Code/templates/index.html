@@ -1,33 +1,18 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-
-<head>
-  <meta charset="utf-8" />
-  <title>Capstone Flask App</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
-</head>
-
-<body>
-  <div class="topnav">
-    <img src="static/pictures/logo2.png" class="login-logo-nav" alt="Caliber Public Safety logo" />
-    <a style="float: right" class="a-plain" href="/logout" target="blank">
-      <button class="button" style="float: right">Log Out</button>
-    </a>
-    <a style="float: right" class="a-plain" href="/edit" target="blank">
-      <button class="button button_green" style="float: right">
-        Edit Dashboards
-      </button>
-    </a>
-  </div>
-
-  {% for key in Dashboards.keys() %}
-  <div class="iframe-div">
-    <h1 class="open-sans-font" style="text-align: center">{{key}}</h1>
-    <iframe width="100%" loading="lazy" height="550" src="{{Dashboards[key]}}" frameborder="0" allowfullscreen="true">
-    </iframe>
-  </div>
-  {% endfor %}
-
-</body>
-
-</html>
+{% extends "navlayout.html"%}
+{% block title %}Dashboards{% endblock %}
+{% block navbar %}
+<a style="float: right" class="a-plain" href="/edit" target="blank">
+  <button class="button button_green" style="float: right">
+    Edit Dashboards
+  </button>
+</a>
+{% endblock %}
+{% block content %}
+{% for key in Dashboards.keys() %}
+<div class="iframe-div">
+  <h1 class="open-sans-font" style="text-align: center">{{key}}</h1>
+  <iframe width="100%" loading="lazy" height="550" src="{{Dashboards[key]}}" frameborder="0" allowfullscreen="true">
+  </iframe>
+</div>
+{% endfor %}
+{% endblock %}
