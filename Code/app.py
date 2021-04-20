@@ -6,9 +6,6 @@ import os
 import json
 
 app = Flask(__name__)
-# app.wsgi_app = SassMiddleware(app.wsgi_app, {
-#     'app': ('static/sass', 'static/css', '/static/css')
-# })
 if os.name == "nt":
     db_file_path = 'sqlite:////' + os.path.dirname(os.path.realpath(__file__)) + "\login.db"
 else:
@@ -75,6 +72,47 @@ def edit():
     if current_user.is_authenticated:
         thisDashboard = json.loads(current_user.dashboard)
     return render_template('edit.html', Dashboards = thisDashboard)
+
+
+
+@app.route('/editform',  methods=['POST'])
+@login_required
+def editform():
+    if request.method == 'POST':
+        if request.form['submit_button'] == 'change':
+            return "Change"
+        elif request.form['submit_button'] == 'remove':
+            return "Remove"
+    return render_template('edit.htlm', Dashboards=getDashboardsDictionary())
+
+
+
+@app.route('/newdash',  methods=['POST'])
+@login_required
+def newdash():
+    newName = request.form['dashboardName']
+    newURL = request.form['powerBIURL']
+    Dashboards = getDashboardsDictionary()
+    if newName not in Dashboards.keys():
+        Dashboards[newName] = newURL
+        JSON = DictionaryToJSON(Dashboards)
+        current_user.dashboard = JSON
+        db.session.commit()
+    else:
+        return render_template('edit.html', Message= "Dashboards Can't Share the same name.", Dashboards = Dashboards)
+    return render_template('edit.html', Dashboards = Dashboards)
+
+############# Helper Fucntions #############   
+def getDashboardsDictionary():
+    if current_user.is_authenticated:
+        Dashboards = json.loads(current_user.dashboard)
+    return Dashboards
+
+def DictionaryToJSON(Dictionary):
+    JSON = json.dumps(Dictionary)
+    return JSON
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
