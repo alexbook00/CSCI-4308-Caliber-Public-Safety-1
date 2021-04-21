@@ -1,10 +1,10 @@
-<html lang="en">
+<!--<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
-  <!-- <link href="{{ url_for('static', filename='css/style.scss.css') }}" rel="stylesheet" type="text/css"> -->
+  <link href="{{ url_for('static', filename='css/style.scss.css') }}" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
   <title>Login</title>
   <style>input:focus, textarea:focus, select:focus{
@@ -13,15 +13,15 @@
 </head>
 
 <body>
-  <!-- <div id = 'container'>
+  <div id = 'container'>
     <img id = 'applogo' src="static/logo.png" alt="" />
     <a href="/home" target="blank"><img id = 'applogo' src="static/logo.png" alt="" /></a>
-</div> -->
+</div> 
   <a><img src="static/pictures/logo.png" class="login-logo" alt="Caliber Public Safety logo" /></a>
   <div class="login-box">
     <div id="content">
       <div id="main" class="open-sans-font">
-        <!-- <h2>Caliber Public Safety - Power BI</h2> -->
+        <h2>Caliber Public Safety - Power BI</h2>
         <div class="title"> Login </div>
         <form action="/loginuser" method="post">
           <div class="input-field">
@@ -39,7 +39,52 @@
           <input class="submit" type="submit">
         </form>
         <div id="para1" class="error-message">{{ Message }}</div>
-      </div>
-</body>
+-->
 
-</html>
+{% extends "layout.html"%} {% block title %}Login{% endblock %} 
+{% block content%}
+<body style="background: white">
+  <div id = 'container'>
+    <img id = 'applogo' src="static/logo.png" alt="" />
+    <a href="/home" target="blank"><img id = 'applogo' src="static/logo.png" alt="" /></a>
+  </div> 
+  <a><img src="static/pictures/logo.png" class="login-logo" alt="Caliber Public Safety logo" /></a>
+  <div class="login-box">
+    <div id="content">
+      <div id="main" class="open-sans-font">
+        <div class="bigTitle">Caliber Public Safety - Power BI </div>
+        <div class="title"> Login </div>
+        <form action="/loginuser" method="post">
+          <div class="input-field">
+            <div class="input-text">Username</div> 
+            <div class="red-star"> * </div>
+            <br>
+            <input
+              style="-webkit-appearance: none;"
+              class="input-text-box"
+              type="username"
+              name="username"
+              placeholder="Username"
+              autocomplete="nope"
+            />
+          </div>
+          <div class="input-field">
+            <div class="input-text">Password</div> 
+            <div class="red-star"> * </div>
+            <br>
+            <input
+              class="input-text-box"
+              type="password"
+              name="password"
+              placeholder="Password"
+              autocomplete="off"
+            />
+          </div>
+          <input class="submit" type="submit" />
+        </form>
+        <div id="para1" class="error-message">{{ Message }}</div>
+      </div>
+      {% endblock %}
+    </div>
+  </div>
+</body>
