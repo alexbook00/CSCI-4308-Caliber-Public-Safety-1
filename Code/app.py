@@ -1,7 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect, flash, send_from_directory, send_file, safe_join, abort, make_response
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-from sassutils.wsgi import SassMiddleware
 import os
 import json
 
@@ -75,17 +74,20 @@ def edit():
 
 
 
-@app.route('/editform',  methods=['POST'])
+@app.route('/remove',  methods=['POST'])
 @login_required
-def editform():
-    if request.method == 'POST':
-        if request.form['submit_button'] == 'change':
-            return "Change"
-        elif request.form['submit_button'] == 'remove':
-            return "Remove"
-    return render_template('edit.htlm', Dashboards=getDashboardsDictionary())
-
-
+def remove():
+    Name = request.form['dashboardName']
+    Dashboards = getDashboardsDictionary()
+    del Dashboards[Name]
+    commitDictionaryToDatabase(Dashboards)
+    return render_template('edit.html', Dashboards=Dashboards)
+    # if request.method == 'POST':
+    #     if request.form['submit_button'] == 'change':
+    #         return "Change"
+    #     elif request.form['submit_button'] == 'remove':
+    #         return "Remove"
+    # return render_template('edit.htlm', Dashboards=getDashboardsDictionary())
 
 @app.route('/newdash',  methods=['POST'])
 @login_required
@@ -95,9 +97,7 @@ def newdash():
     Dashboards = getDashboardsDictionary()
     if newName not in Dashboards.keys():
         Dashboards[newName] = newURL
-        JSON = DictionaryToJSON(Dashboards)
-        current_user.dashboard = JSON
-        db.session.commit()
+        commitDictionaryToDatabase(Dashboards)
     else:
         return render_template('edit.html', Message= "Dashboards Can't Share the same name.", Dashboards = Dashboards)
     return render_template('edit.html', Dashboards = Dashboards)
@@ -111,8 +111,11 @@ def getDashboardsDictionary():
 def DictionaryToJSON(Dictionary):
     JSON = json.dumps(Dictionary)
     return JSON
-
-
+    
+def commitDictionaryToDatabase(Dictionary):
+    JSON = DictionaryToJSON(Dictionary)
+    current_user.dashboard = JSON
+    db.session.commit()
 
 if __name__ == '__main__':
     app.run(debug=True)
