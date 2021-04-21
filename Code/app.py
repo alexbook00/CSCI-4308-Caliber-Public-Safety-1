@@ -1,13 +1,10 @@
 from flask import Flask, render_template, url_for, request, redirect, flash, send_from_directory, send_file, safe_join, abort, make_response
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
-from sassutils.wsgi import SassMiddleware
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import os
+import json
 
 app = Flask(__name__)
-# app.wsgi_app = SassMiddleware(app.wsgi_app, {
-#     'app': ('static/sass', 'static/css', '/static/css')
-# })
 if os.name == "nt":
     db_file_path = 'sqlite:////' + os.path.dirname(os.path.realpath(__file__)) + "\login.db"
 else:
@@ -24,6 +21,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(30), unique=True)
     password = db.Column(db.String(30))
+    dashboard = db.Column(db.Text)
     
 #flask-login call back funtion to load user
 @login_manager.user_loader
@@ -63,7 +61,61 @@ def logout():
 @app.route('/index')
 @login_required
 def index():
-    return render_template('index.html')
+    if current_user.is_authenticated:
+        thisDashboard = json.loads(current_user.dashboard)
+    return render_template('index.html', Dashboards = thisDashboard)
+
+@app.route('/edit')
+@login_required
+def edit():
+    if current_user.is_authenticated:
+        thisDashboard = json.loads(current_user.dashboard)
+    return render_template('edit.html', Dashboards = thisDashboard)
+
+
+
+@app.route('/remove',  methods=['POST'])
+@login_required
+def remove():
+    Name = request.form['dashboardName']
+    Dashboards = getDashboardsDictionary()
+    del Dashboards[Name]
+    commitDictionaryToDatabase(Dashboards)
+    return render_template('edit.html', Dashboards=Dashboards)
+    # if request.method == 'POST':
+    #     if request.form['submit_button'] == 'change':
+    #         return "Change"
+    #     elif request.form['submit_button'] == 'remove':
+    #         return "Remove"
+    # return render_template('edit.htlm', Dashboards=getDashboardsDictionary())
+
+@app.route('/newdash',  methods=['POST'])
+@login_required
+def newdash():
+    newName = request.form['dashboardName']
+    newURL = request.form['powerBIURL']
+    Dashboards = getDashboardsDictionary()
+    if newName not in Dashboards.keys():
+        Dashboards[newName] = newURL
+        commitDictionaryToDatabase(Dashboards)
+    else:
+        return render_template('edit.html', Message= "Dashboards Can't Share the same name.", Dashboards = Dashboards)
+    return render_template('edit.html', Dashboards = Dashboards)
+
+############# Helper Fucntions #############   
+def getDashboardsDictionary():
+    if current_user.is_authenticated:
+        Dashboards = json.loads(current_user.dashboard)
+    return Dashboards
+
+def DictionaryToJSON(Dictionary):
+    JSON = json.dumps(Dictionary)
+    return JSON
+    
+def commitDictionaryToDatabase(Dictionary):
+    JSON = DictionaryToJSON(Dictionary)
+    current_user.dashboard = JSON
+    db.session.commit()
 
 if __name__ == '__main__':
     app.run(debug=True)
