@@ -15,6 +15,7 @@
 {% if current_user.username == "CaliberAdmin" %}
 <div class="edit-div"><h1 class="open-sans-font" style="text-align: center">Active Users</h1></div>
   {% for user in Dashboards %}
+  {% if user.username != "CaliberAdmin" %}
   <div class="edit-div">
   <form class="form-inline" action="/editusers" method="post"  onSubmit="return confirm('Are you sure you wish to continue?');">
     <input type="hidden" value="{{user.id}}" name="userID"/>
@@ -26,6 +27,7 @@
     <button type="submit"  name="submit_button" value="remove">Remove</button>
   </form>
   </div>
+  {% endif %}
   {% endfor %}
 
   <div class="edit-div">
