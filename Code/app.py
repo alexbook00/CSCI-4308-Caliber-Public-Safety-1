@@ -61,7 +61,14 @@ def logout():
 @app.route('/index')
 @login_required
 def index():
-    if current_user.is_authenticated:
+    if current_user.username == "CaliberAdmin":
+        thisDashboard = User.query.all()
+        # print(users)
+        # thisDashboard = {}
+        # for user in users:
+        #     if user.username != "CaliberAdmin":
+        #         thisDashboard = {**thisDashboard, **json.loads(user.dashboard)}
+    elif current_user.is_authenticated:
         thisDashboard = json.loads(current_user.dashboard)
     return render_template('index.html', Dashboards = thisDashboard)
 
@@ -82,12 +89,38 @@ def remove():
     del Dashboards[Name]
     commitDictionaryToDatabase(Dashboards)
     return render_template('edit.html', Dashboards=Dashboards)
-    # if request.method == 'POST':
-    #     if request.form['submit_button'] == 'change':
-    #         return "Change"
-    #     elif request.form['submit_button'] == 'remove':
-    #         return "Remove"
-    # return render_template('edit.htlm', Dashboards=getDashboardsDictionary())
+
+
+@app.route('/editusers',  methods=['POST','GET'])
+@login_required
+def editusers():
+    if current_user.username != "CaliberAdmin":
+        return redirect(url_for('index'))
+    username = request.form['username']
+    password = request.form['password']
+    userID = request.form['userID']
+    if request.method == 'POST':
+        if request.form['submit_button'] == 'change':
+            print(username, password, userID)
+            changeUserInfo(userID, username, password)
+        elif request.form['submit_button'] == 'remove':
+            removeUser(userID)
+    return render_template('index.html', Dashboards=User.query.all())
+
+
+@app.route('/adduser',  methods=['POST', 'GET'])
+@login_required
+def adduser():
+    if current_user.username != "CaliberAdmin":
+        return redirect(url_for('index'))
+    username = request.form['username']
+    password = request.form['password']
+    users = User.query.all()
+    for user in users:
+        if user.username == username:
+            return render_template('index.html', Dashboards=User.query.all(), Message="Username already exists.")
+    addNewUser(username, password)
+    return render_template('index.html', Dashboards=User.query.all())
 
 @app.route('/newdash',  methods=['POST'])
 @login_required
@@ -116,6 +149,23 @@ def commitDictionaryToDatabase(Dictionary):
     JSON = DictionaryToJSON(Dictionary)
     current_user.dashboard = JSON
     db.session.commit()
+
+def changeUserInfo(userID, username, password):
+    users = User.query.all()
+    user = User.query.filter_by(id = userID).first()
+    user.username = username
+    user.password = password
+    db.session.commit()
+
+def addNewUser(username, password):
+    newuser = User(username=username, password=password, dashboard=DictionaryToJSON({"DashBoard Name Placeholder": "https://ThisIsAPlaceHolderURL.fake"}))
+    db.session.add(newuser)
+    db.session.commit()
+
+def removeUser(userID):
+    User.query.filter_by(id = userID).delete()
+    db.session.commit()
+
 
 if __name__ == '__main__':
     app.run(debug=True)
