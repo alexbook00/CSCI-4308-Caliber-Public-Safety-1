@@ -4,20 +4,22 @@
     --main-gray: #54565a;
   }
 
-
 .login-box {
-    background: #fdfefe;
-    margin: auto;
-    width: 50%;
-    padding: 10px;
+    background: var(--main-blue);
+    margin-left: 15%;
+    width: 66%;
+    border-radius: 25px;
+    padding-left: 2%;
+    padding-bottom: .75%;
+    padding-top: .75%;
   }
 
 .login-logo{
-    width: 20vw;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 40%;
+    margin-left: 15%;
+    margin-top: 50px;
+    margin-bottom: 25px;
+    width: 20%;
 }
 
 .login-logo-nav{
@@ -112,8 +114,66 @@
     margin:auto;
     border-top: 1px solid var(--main-gray);
     display:block;
-}
+  }
 
+  .input-text-box{
+    background-color: #e4e4e4;
+    border: 2px solid #b2b2b2;
+    border-radius: 0;
+    color: #787878;
+    padding: 8px;
+    width: 33%
+  }
+  .input-text-box:hover{
+    border: 2px solid var(--main-gold)
+  }
+  .input-text-box:focus{
+    background-color: white;
+    border: 2px solid var(--main-gold)
+  }
+  .input-field {
+    margin-bottom: 10px;
+  }
+  .submit{
+    border: 2px solid black;
+    margin-top: 10px;
+    margin: auto;
+  }
+  .input-text{
+    color: white;
+    font-size: 1em;
+    display: inline
+  }
+  .red-star{
+    font-size: 1em;
+    display: inline;
+    color: red;
+  }
+  .title{
+    color: white;
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  .bigTitle{
+    color: white;
+    font-size: 2.5em;
+  }
+  .submit{
+    margin-top: 10px;
+    margin-bottom: 15px;
+    background-color: var(--main-gold);
+    font-size: 1em;
+    color: var(--main-blue);
+    padding: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 0px;
+    border-radius: 4px;
+  }
+  .error-message{
+    color: white;
+    font-size: 1.5em;
+  }
 * {box-sizing: border-box;}
 
 .form-inline {  

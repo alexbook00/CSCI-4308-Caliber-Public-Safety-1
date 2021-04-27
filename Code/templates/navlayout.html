@@ -6,10 +6,14 @@
     <meta charset="utf-8" />
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <style>input:focus, textarea:focus, select:focus{
+        outline: none;
+    }</style>
     {% endblock %}
 </head>
 
 <body>
+    <body style="background: var(--main-blue);"></body>
     <div class="topnav">
         <img src="static/pictures/logo2.png" class="login-logo-nav" alt="Caliber Public Safety logo" />
         <a style="float: right" class="a-plain" href="/logout" target="blank">

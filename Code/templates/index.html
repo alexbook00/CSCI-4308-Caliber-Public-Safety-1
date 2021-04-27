@@ -1,18 +1,52 @@
 {% extends "navlayout.html"%}
 {% block title %}Dashboards{% endblock %}
 {% block navbar %}
-<a style="float: right" class="a-plain" href="/edit" target="blank">
-  <button class="button button_green" style="float: right">
-    Edit Dashboards
-  </button>
-</a>
+  {% if current_user.username != "CaliberAdmin" %}
+  <a style="float: right" class="a-plain" href="/edit" target="blank">
+    <button class="button button_green" style="float: right">
+      Edit Dashboards
+    </button>
+  </a>
+  {%endif%}
 {% endblock %}
 {% block content %}
-{% for key in Dashboards.keys() %}
-<div class="iframe-div">
-  <h1 class="open-sans-font" style="text-align: center">{{key}}</h1>
-  <iframe width="100%" loading="lazy" height="800" src="{{Dashboards[key]}}" frameborder="0" allowfullscreen="true">
-  </iframe>
-</div>
-{% endfor %}
+{% if current_user.username == "CaliberAdmin" %}
+<div class="edit-div"><h1 class="open-sans-font" style="text-align: center">Active Users</h1></div>
+  {% for user in Dashboards %}
+  {% if user.username != "CaliberAdmin" %}
+  <div class="edit-div">
+  <form class="form-inline" action="/editusers" method="post"  onSubmit="return confirm('Are you sure you wish to continue?');">
+    <input type="hidden" value="{{user.id}}" name="userID"/>
+    <label for="text">Username:</label>
+    <input type="text" value="{{user.username}}" name="username">
+    <label for="pwd">Password:</label>
+    <input type="text" value="{{user.password}}" name="password">
+    <button type="submit" name="submit_button" value="change"  class="button button_yellow">Submit Change</button>
+    <button type="submit"  name="submit_button" value="remove">Remove</button>
+  </form>
+  </div>
+  {% endif %}
+  {% endfor %}
+  <div class="edit-div">
+    <h1>Enter New User</h1>
+    <form class="form-inline" action="/adduser" method="post">
+      <label for="text" >Username:</label>
+      <input type="text" placholder="Enter Username" name="username">
+      <label for="pwd">Password:</label>
+      <input type="text" placholder="Enter Username" name="password">
+      <button type="submit" class="button button_add ">ADD</button>
+    </form>
+    <h1>{{Message}}</h1>
+  </div>
+{% else %}
+  {% for key in Dashboards.keys() %}
+  <div class="iframe-div">
+    <h1 class="open-sans-font" style="text-align: center; color: white">{{key}}</h1>
+    <iframe width="100%" loading="lazy" height="800" src="{{Dashboards[key]}}" frameborder="0" allowfullscreen="true">
+    </iframe>
+  </div>
+  {% endfor %}
+{% endif %}
+
+
 {% endblock %}

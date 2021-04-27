@@ -5,12 +5,11 @@
   style="float: left;">Back to Dashboards</button></a>
 {%endblock%}
 {% block content %}
-<body style="background: var(--main-blue);"></body>
 <div class="edit-div">
   <h1>Active Dashboard</h1>
 {% for key in Dashboards.keys() %}
 <form class="form-inline" action="/remove" method="post"  onSubmit="return confirm('Are you sure you wish to delete?');">
-  <label for="text"> {{loop.index}} Dashboard Name:</label>
+  <label for="text">Dashboard Name:</label>
   <input type="text" value="{{key}}" id="Dashboard" placeholder="Dashboard Name" name="dashboardName">
   <label for="pwd">Power BI URL:</label>
   <input class="input_url" type="url" value="{{Dashboards[key]}}" id="powerBIURL" placeholder="Power BI URL" name="powerBIURL">
