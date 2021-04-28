@@ -2,12 +2,12 @@
 {% block title %}Dashboards{% endblock %}
 {% block navbar %}
 {% if current_user.username != "CaliberAdmin" %}
-<img src="static/pictures/logo2.png" class="login-logo-nav" alt="Caliber Public Safety logo" style="margin-left: 28%"/>
+<img src="static/pictures/logo2.png" class="login-logo-nav" alt="Caliber Public Safety logo"/>
 <a style="float: right" class="a-plain" href="/logout" target="blank">
-  <div class="button logout-button" style="float: right; margin-right: 50px;">Log Out</div>
+  <div class="button logout-button" style="right: 40px">Log Out</div>
 </a>
 <a style="float: left" class="a-plain" href="/edit" target="blank">
-  <button class="button logout-button" style="float: right; margin-left: 50px;">
+  <button class="button logout-button" style="left: 50px">
     Edit Dashboards
   </button>
 </a>
@@ -15,7 +15,7 @@
 {% if current_user.username == "CaliberAdmin" %}
 <img src="static/pictures/logo2.png" class="login-logo-nav" alt="Caliber Public Safety logo" />
 <a style="float: right" class="a-plain" href="/logout" target="blank">
-  <div class="button logout-button" style="float: right; margin-right: 50px;">Log Out</div>
+  <div class="button logout-button" style="right: 40px">Log Out</div>
 </a>
 {%endif%}
 {% endblock %}

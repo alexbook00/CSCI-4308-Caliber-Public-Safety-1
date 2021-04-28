@@ -24,9 +24,9 @@
 
 .login-logo-nav{
   width: 20vw;
-  display: inline;
+  display: block;
   width: 150px;
-  margin-left: 45%;
+  margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
 }
@@ -60,7 +60,8 @@
     background-color: #f44336;
   }
   .logout-button{
-    margin-top: 20px;
+    position: absolute;
+    top: 10px;
     background-color: var(--main-gold);
     font-size: 1.15em;
     color: var(--main-blue);
@@ -70,7 +71,6 @@
     border: 0px;
     border-radius: 4px;
     transition: 0.3s;
-    margin-right: 10px;
   }
   .logout-button:hover{
     background-color: #e4e4e4;
