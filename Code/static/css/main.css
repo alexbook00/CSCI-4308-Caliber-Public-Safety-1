@@ -24,9 +24,10 @@
 
 .login-logo-nav{
   width: 20vw;
-  float: left;
-  width: 100px;
-  margin-left: 50px;
+  display: inline;
+  width: 150px;
+  margin-left: 45%;
+  margin-right: auto;
   margin-top: 10px;
 }
 
@@ -43,23 +44,7 @@
     overflow: hidden;
     background-color: var(--main-blue);
   }
-  
-  .button {
-    background-color: var(--main-gold); /* Green */
-    border: none;
-    color: black;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 15px 14px;
-    cursor: pointer;
-    transition-duration: 0.4s;
-  }
-  .button_green{
-    background-color: #4CAF50;
-  }
+
   .button_add{
     background-color: #4CAF50;
     color: white;
@@ -74,8 +59,39 @@
   .button_red{
     background-color: #f44336;
   }
-  .button_right{
-    margin-right: 50px;
+  .logout-button{
+    margin-top: 20px;
+    background-color: var(--main-gold);
+    font-size: 1.15em;
+    color: var(--main-blue);
+    padding: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 0px;
+    border-radius: 4px;
+    transition: 0.3s;
+    margin-right: 10px;
+  }
+  .logout-button:hover{
+    background-color: #e4e4e4;
+    color: var(--main-blue)
+  }
+  .logout-button{
+    margin-top: 10px;
+    background-color: var(--main-gold);
+    font-size: 1.15em;
+    color: var(--main-blue);
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 0px;
+    border-radius: 4px;
+    transition: 0.3s;
+    margin-right: 10px;
+  }
+  .logout-button:hover{
+    background-color: #e4e4e4;
+    color: var(--main-blue)
   }
   .button:hover {
     background-color: rgb(255, 255, 255); 
@@ -91,7 +107,7 @@
   .a-plain{
     color: black;
     text-decoration: none;
-}
+  }
 
 
   .iframe-div{
@@ -101,13 +117,16 @@
     border-left: 50px solid var(--main-blue);
   }
   .edit-div{
-    background-color: white;
-    border-top: 1px solid var(--main-blue);
-    border-bottom: 50px solid var(--main-blue);
-    border-right: 50px solid var(--main-blue);
-    border-left: 50px solid var(--main-blue);
+    background: white;
     text-align: center;
     padding: 25px;
+    margin-left: 10%;
+    width: 80%;
+    border-radius: 25px;
+    padding-left: 2%;
+    padding-bottom: .75%;
+    padding-top: .75%;
+    margin-bottom: 2%;
   }
 
   iframe {
@@ -122,7 +141,7 @@
     border-radius: 0;
     color: #787878;
     padding: 8px;
-    width: 33%
+    width: 30%;
   }
   .input-text-box:hover{
     border: 2px solid var(--main-gold)
@@ -162,13 +181,18 @@
     margin-top: 10px;
     margin-bottom: 15px;
     background-color: var(--main-gold);
-    font-size: 1em;
+    font-size: 1.15em;
     color: var(--main-blue);
     padding: 15px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
     border: 0px;
     border-radius: 4px;
+    transition: 0.3s;
+  }
+  .submit:hover{
+    background-color: #e4e4e4;
+    color: var(--main-blue)
   }
   .error-message{
     color: white;
@@ -189,45 +213,59 @@
 }
 
 .form-inline input {
-  vertical-align: middle;
-  margin: 5px 10px 5px 0;
-  padding: 10px;
-  background-color: #fff;
-  border: 1px solid #ddd;
+  background-color: #e4e4e4;
+  border: 2px solid #b2b2b2;
+  border-radius: 0;
+  color: #787878;
+  padding: 8px;
+  width: 22%;
+  margin-right: 10px;
+}
+.form-inline input:hover{
+  border: 2px solid var(--main-gold)
+}
+.form-inline input:focus{
+  background-color: white;
+  border: 2px solid var(--main-gold)
 }
 .form-inline .input_url{
   flex: 1 1 auto;
 }
 
-.form-inline button {
-  padding: 10px 20px;
-  background-color: #f44336;
-  border: 1px solid #ddd;
+.form-inline button.red{
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-right: 10px;
+  margin-left: 0px;
+  background-color: #f52c47;
+  font-size: .85em;
   color: white;
-  cursor: pointer;
-  transition-duration: 0.4s;
+  padding: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: 0px;
+  border-radius: 4px;
+  transition: 0.3s;
 }
- .form-inline button.button_add{
-  background-color: #4CAF50;
+.form-inline button.red:hover{
+  background-color: #f5697c;
+}
+.form-inline button.submit{
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-right: 10px;
+  margin-left: 0px;
+  background-color: var(--main-blue);
+  font-size: .85em;
   color: white;
-  width: 100%;
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-  margin: auto;
-  justify-content: center;
-  margin-top: 25px;
+  padding: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: 0px;
+  border-radius: 4px;
+  transition: 0.3s;
 }
-.form-inline button.button_yellow{
-  padding: 10px 20px;
+.form-inline button.submit:hover{
   background-color: var(--main-gold);
-  border: 1px solid #ddd;
-  color: white;
-  cursor: pointer;
-  transition-duration: 0.4s;
- 
-}
-
-.form-inline button:hover {
-  background-color: #d4d4d4;
+  color: var(--main-blue)
 }

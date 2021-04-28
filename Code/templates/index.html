@@ -1,13 +1,23 @@
 {% extends "navlayout.html"%}
 {% block title %}Dashboards{% endblock %}
 {% block navbar %}
-  {% if current_user.username != "CaliberAdmin" %}
-  <a style="float: right" class="a-plain" href="/edit" target="blank">
-    <button class="button button_green" style="float: right">
-      Edit Dashboards
-    </button>
-  </a>
-  {%endif%}
+{% if current_user.username != "CaliberAdmin" %}
+<img src="static/pictures/logo2.png" class="login-logo-nav" alt="Caliber Public Safety logo" style="margin-left: 28%"/>
+<a style="float: right" class="a-plain" href="/logout" target="blank">
+  <div class="button logout-button" style="float: right; margin-right: 50px;">Log Out</div>
+</a>
+<a style="float: left" class="a-plain" href="/edit" target="blank">
+  <button class="button logout-button" style="float: right; margin-left: 50px;">
+    Edit Dashboards
+  </button>
+</a>
+{%endif%}
+{% if current_user.username == "CaliberAdmin" %}
+<img src="static/pictures/logo2.png" class="login-logo-nav" alt="Caliber Public Safety logo" />
+<a style="float: right" class="a-plain" href="/logout" target="blank">
+  <div class="button logout-button" style="float: right; margin-right: 50px;">Log Out</div>
+</a>
+{%endif%}
 {% endblock %}
 {% block content %}
 {% if current_user.username == "CaliberAdmin" %}
@@ -21,8 +31,8 @@
     <input type="text" value="{{user.username}}" name="username">
     <label for="pwd">Password:</label>
     <input type="text" value="{{user.password}}" name="password">
-    <button type="submit" name="submit_button" value="change"  class="button button_yellow">Submit Change</button>
-    <button type="submit"  name="submit_button" value="remove">Remove</button>
+    <button type="submit" name="submit_button" value="change" class="button submit">Submit Change</button>
+    <button type="submit" name="submit_button" value="remove" class="button red">Remove</button>
   </form>
   </div>
   {% endif %}
@@ -34,7 +44,7 @@
       <input type="text" placholder="Enter Username" name="username">
       <label for="pwd">Password:</label>
       <input type="text" placholder="Enter Username" name="password">
-      <button type="submit" class="button button_add ">ADD</button>
+      <button type="submit" class="button submit">ADD</button>
     </form>
     <h1>{{Message}}</h1>
   </div>

@@ -15,10 +15,6 @@
 <body>
     <body style="background: var(--main-blue);"></body>
     <div class="topnav">
-        <img src="static/pictures/logo2.png" class="login-logo-nav" alt="Caliber Public Safety logo" />
-        <a style="float: right" class="a-plain" href="/logout" target="blank">
-          <button class="button button_right" style="float: right">Log Out</button>
-        </a>
         {% block navbar%}{% endblock%}
     </div>
     {% block content %}{% endblock %}
